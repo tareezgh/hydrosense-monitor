@@ -1,6 +1,6 @@
 # HydroSense Monitor
 
-A responsive dashboard for visualizing hydroponic sensor data (pH, temperature, EC) with alert classification, charts, and tests.
+A dashboard for visualizing hydroponic sensor data (pH, temperature, EC) with alert classification, charts, and tests.
 
 [▶️ Watch demo video](https://drive.google.com/file/d/1_aTMvt_TSjCy3bKhukdehpO8xHWybZSG/view?usp=drive_link)
 
