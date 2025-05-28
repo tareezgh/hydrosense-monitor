@@ -2,6 +2,7 @@
 
 A responsive dashboard for visualizing hydroponic sensor data (pH, temperature, EC) with alert classification, charts, and tests.
 
+[▶️ Watch demo video](https://drive.google.com/file/d/1_aTMvt_TSjCy3bKhukdehpO8xHWybZSG/view?usp=drive_link)
 
 ### Features:
 
@@ -143,15 +144,19 @@ source venv/bin/activate  # or `.\venv\Scripts\activate` on Windows
 PYTHONPATH=. pytest -v
 
 ```
-Tests include:
 
- - Input validation
+| Test Function                         | Description                                                                 |
+|--------------------------------------|-----------------------------------------------------------------------------|
+| `test_missing_readings`              | Verifies that a request without the `readings` field returns 422.          |
+| `test_missing_unit_id`              | Ensures missing `unitId` results in a validation error.                    |
+| `test_invalid_timestamp_format`      | Checks that an invalid timestamp format is rejected.                       |
+| `test_invalid_ph_range`              | Confirms that out-of-range pH values are not accepted.                     |
+| `test_classification_healthy`        | Valid input returns classification as `"Healthy"`.                         |
+| `test_classification_needs_attention`| Valid input with poor readings returns `"Needs Attention"`.                |
+| `test_get_alerts_empty_unit`         | Getting alerts for a non-existent unit returns an empty list.              |
+| `test_alert_storage_and_retrieval`   | Tests that alerts are correctly stored and retrieved for a unit.           |
+| `test_malformed_json_readings_field` | Verifies that a string `readings` field (invalid type) returns 422.        |
 
- - Classification logic (Healthy vs Needs Attention)
-
- - Alert storage and retrieval
-
- - Edge case handling (e.g. malformed JSON)
 
 
 ### Frontend (Jest + React Testing Library)
@@ -163,16 +168,12 @@ To run the frontend tests:
 cd frontend
 npm test
 ```
-Tests cover:
 
- - Alert Table Component rendering
+| Test File                      | Description                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| `AlertTable.test.tsx`         | Renders alerts table, checks header/rows, and verifies row color logic by classification. |
+| `SensorLineChart.test.tsx`    | Mocks the chart and tests conditional UI rendering, summary messages, and metric labels. |
+| `App.test.tsx`                | Integration test for main app flow: mocks API + hook, triggers `postSensorReading` via UI. |
+| `useAlerts.test.tsx`          | Unit tests for custom hook logic: verifies loading state, error handling, and alert data fetch. |
 
- - Color styling based on classification
 
- - Fetch Alerts flow
-
- - Send Random Reading behavior
-
- - Chart rendering and enhancement behavior
-
-[▶️ Watch demo video](https://drive.google.com/file/d/1_aTMvt_TSjCy3bKhukdehpO8xHWybZSG/view?usp=drive_link)
